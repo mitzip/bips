@@ -22,7 +22,7 @@ This BIP is a particular application of BIP43.
 The structure proposed in this document allows for standard ways to create,
 use, import, and HDPM wallets. It allows to handle multiple parties sharing
 an m-of-n wallet, on the following assumptions:
-* N parties share an m-of-n wallet.
+* n parties share an m-of-n wallet.
 * Each party generates their master private keys independently.
 * Multisig P2SH is used for all addresses.
 * BIP32 is used to derive public keys, then create a multisig script, and the corresponding P2SH address for that script.
