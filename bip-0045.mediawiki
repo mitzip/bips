@@ -35,9 +35,9 @@ This BIP will allow interoperability between various DPM wallet implementations.
 
 We define the following levels in BIP32 path:
 
-<pre>
+```
 m / purpose' / cosigner_index / change / address_index
-</pre>
+```
 
 Apostrophe in the path indicates that BIP32 hardened derivation is used.
 
@@ -45,48 +45,46 @@ Each level has special meaning described in the chapters below.
 
 ===Purpose===
 
-Purpose is a constant set to  following the BIP43 recommendation.
+Purpose is a constant set to NNNN, following the BIP43 recommendation.
 It indicates that the subtree of this node is used according to this specification.
 
-Hardened derivation is used at this level.
-
-===Coin type===
-
-One master node (seed) can be used for unlimited number of independent
-cryptocoins such as Bitcoin, Litecoin or Namecoin. However, sharing the same
-space for various cryptocoins has some disadvantages.
-
-This level creates a separate subtree for every cryptocoin, avoiding
-reusing addresses across cryptocoins and improving privacy issues.
-
-Coin type is a constant set for each cryptocoin. Cryptocoin developers may ask
-for registering unused number for their project.
-
-The list of already allocated coin types is in the chapter
-"Registered coin types" below.
+```
+m / purpose' / *
+```
 
 Hardened derivation is used at this level.
 
-===Account===
 
-This level splits the key space into independent user identities,
-so the wallet never mixes the coins across different accounts.
+===Cosigner Index===
 
-User can use these accounts to organize the funds in the same
-fashion like bank accounts; for donation purposes (where all
-addresses are considered public), for saving purposes,
-for common expenses etc.
+The index of the party creating a P2SH multisig address. The indices can
+be determined independently by lexicographically sorting the master public
+keys of each cosigner. Each cosigner creates addresses on it's own branch,
+even though they have independent extended master public key, as explained 
+in the "Address generation" section.
 
-Accounts are numbered from index 0 in sequentially increasing manner.
-This number is used as child index in BIP32 derivation.
+Software should only use indices corresponding to each of the N cosigners
+sequentially. For example, for a 2-of-3 HDPM wallet, having the following
+master public keys:
+```
+03a473275a750a20b7b71ebeadfec83130c014da4b53f1c4743fcf342af6589a38
+039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463
+03f76588e06c0d688617ef365d1e58a7f1aa84daa3801380b1e7f12acc9a69cd13
+```
 
-Hardened derivation is used at this level.
+it should use `m / purpose ' / 0 / *` for 
+`039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463`, 
+`m / purpose ' / 1 / *` for
+`03a473275a750a20b7b71ebeadfec83130c014da4b53f1c4743fcf342af6589a38`,
+and `m / purpose ' / 2 / *` for
+`03f76588e06c0d688617ef365d1e58a7f1aa84daa3801380b1e7f12acc9a69cd13`,
+as dictated by their lexicographical order.
 
-Software should prevent a creation of an account if previous account does not
-have a transaction history (meaning none of its addresses have been used before).
 
-Software needs to discover all used accounts after importing the seed from
-an external source. Such algorithm is described in "Account discovery" chapter.
+Software needs to discover all used indexes when importing the seed from
+an external source. Such algorithm is described in "Address discovery" chapter.
+
+Non-hardened derivation is used at this level.
 
 ===Change===
 
@@ -96,16 +94,20 @@ to be visible outside of the wallet (e.g. for receiving payments). Internal
 chain is used for addresses which are not meant to be visible outside of the
 wallet and is used for return transaction change.
 
-Public derivation is used at this level.
+For example, if cosigner 2 wants to generate a change address, he would use
+`m / purpose ' / 2 / 1 / *`, and `m / purpose ' / 2 / 0 / *` for a receive
+address.
 
-===Index===
+Non-hardened derivation is used at this level.
+
+===Address Index===
 
 Addresses are numbered from index 0 in sequentially increasing manner.
 This number is used as child index in BIP32 derivation.
 
-Public derivation is used at this level.
+Non-hardened derivation is used at this level.
 
-==Account discovery==
+==Address discovery==
 
 When the master seed is imported from an external source the software should
 start to discover the accounts in the following manner:
@@ -133,32 +135,10 @@ and stops searching the address chain.
 Wallet software should warn when user is trying to exceed the gap limit on
 an external chain by generating a new address.
 
-==Registered coin types==
-
-These are the registered coin types for usage in level 2 of BIP44 described in
-chapter "Coin type" above.
-
-All these constants are used as hardened derivation.
-
-{|
-!index
-!hexa
-!coin
-|-
-|0
-|0x80000000
-|Bitcoin
-|-
-|1
-|0x80000001
-|Bitcoin Testnet
-|}
-
 ==Examples==
 
 {|
-!coin
-!account
+!cosigner_id
 !chain
 !address
 !path
