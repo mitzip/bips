@@ -66,11 +66,11 @@ in the "Address generation" section.
 Software should only use indices corresponding to each of the N cosigners
 sequentially. For example, for a 2-of-3 HDPM wallet, having the following
 master public keys:
-<code>
+<pre>
     03a473275a750a20b7b71ebeadfec83130c014da4b53f1c4743fcf342af6589a38
     039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463
     03f76588e06c0d688617ef365d1e58a7f1aa84daa3801380b1e7f12acc9a69cd13
-</code>
+</pre>
 
 it should use `m / purpose ' / 0 / *` for 
 `039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463`, 
