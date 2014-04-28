@@ -121,7 +121,7 @@ multisig script and the corresponding p2sh address. In this way, each path
 corresponds to an address, but the public keys for that address come from
 different trees.
 
-==Receive address case==
+====Receive address case====
 Each cosigner generates addresses only on his own branch. One of the n
 cosigners wants to receive a payment, and the others are offline. He
 knows the last used index in his own branch, because only he generates
@@ -133,7 +133,7 @@ used index on his own branch is 4. Then, the path for the next receive
 address is `m/$purpose/2/1/5`. He uses this same path in all of the cosigners
 trees to generate a public key for each one, and from that he gets the new
 p2sh address.
-==Change address case==
+====Change address case====
 Again, each cosigner generates addresses only on his own branch. One of the
 n cosigners wants to create an outgoing payment, for which he'll need a change
 address. He generates a new address using the same procedure as above, but
