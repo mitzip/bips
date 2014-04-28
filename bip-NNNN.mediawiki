@@ -67,9 +67,9 @@ Software should only use indices corresponding to each of the N cosigners
 sequentially. For example, for a 2-of-3 HDPM wallet, having the following
 master public keys:
 <pre>
-    03a473275a750a20b7b71ebeadfec83130c014da4b53f1c4743fcf342af6589a38
-    039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463
-    03f76588e06c0d688617ef365d1e58a7f1aa84daa3801380b1e7f12acc9a69cd13
+03a473275a750a20b7b71ebeadfec83130c014da4b53f1c4743fcf342af6589a38
+039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463
+03f76588e06c0d688617ef365d1e58a7f1aa84daa3801380b1e7f12acc9a69cd13
 </pre>
 
 it should use `m / purpose ' / 0 / *` for 
@@ -128,7 +128,7 @@ knows the last used index in his own branch, because only he generates
 addresses there. Thus, he can generate the public keys for all of the
 others using the next index, and calculate the needed script for the address.
 
-Example: Cosigner #2 wants to receive a payment to the shared wallet. His last
+*Example:* Cosigner #2 wants to receive a payment to the shared wallet. His last
 used index on his own branch is 4. Then, the path for the next receive
 address is `m/$purpose/2/1/5`. He uses this same path in all of the cosigners
 trees to generate a public key for each one, and from that he gets the new
@@ -139,7 +139,7 @@ n cosigners wants to create an outgoing payment, for which he'll need a change
 address. He generates a new address using the same procedure as above, but
 using a separate index to track the used change addresses. 
 
-Example: Cosigner #5 wants to send a payment from the shared wallet, for which
+*Example:* Cosigner #5 wants to send a payment from the shared wallet, for which
 he'll need a change address. His last used change index on his own branch is
 11. Then, the path for the next change address is `m/$purpose/5/0/12`. He uses
 this same path in all of the cosigners trees to generate a public key for each
