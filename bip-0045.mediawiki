@@ -107,7 +107,58 @@ This number is used as child index in BIP32 derivation.
 
 Non-hardened derivation is used at this level.
 
-==Address discovery==
+===HDPM Wallet High-level Description===
+Each party generates their own extended master keypair and shares the
+extended purpose' public key with the others, which is stored encrypted.
+Each party can generate any of the other's derived public keys, but only
+his own private keys. 
+
+===Address Generation Procedure===
+When generating an address, each party can independently generate the N
+needed public keys. They do this by deriving the public key in each of
+the different trees, but using the same path. They can then generate the
+multisig script and the corresponding p2sh address. In this way, each path
+corresponds to an address, but the public keys for that address come from
+different trees.
+
+==Receive address case==
+Each cosigner generates addresses only on his own branch. One of the n
+cosigners wants to receive a payment, and the others are offline. He
+knows the last used index in his own branch, because only he generates
+addresses there. Thus, he can generate the public keys for all of the
+others using the next index, and calculate the needed script for the address.
+
+Example: Cosigner #2 wants to receive a payment to the shared wallet. His last
+used index on his own branch is 4. Then, the path for the next receive
+address is `m/$purpose/2/1/5`. He uses this same path in all of the cosigners
+trees to generate a public key for each one, and from that he gets the new
+p2sh address.
+==Change address case==
+Again, each cosigner generates addresses only on his own branch. One of the
+n cosigners wants to create an outgoing payment, for which he'll need a change
+address. He generates a new address using the same procedure as above, but
+using a separate index to track the used change addresses. 
+
+Example: Cosigner #5 wants to send a payment from the shared wallet, for which
+he'll need a change address. His last used change index on his own branch is
+11. Then, the path for the next change address is `m/$purpose/5/0/12`. He uses
+this same path in all of the cosigners trees to generate a public key for each
+one, and from that he gets the new p2sh address.
+
+
+===Transaction creation and signing===
+When creating a transaction, first one of the parties creates a Transaction
+Proposal. This is a transaction that spends some output stored in any of the
+p2sh multisig addresses (corresponding to any of the copayers' branches).
+This proposal is sent to the other parties, who decide if they want to sign.
+If they approve the proposal, they can generate their needed private key for
+that specific address (using the same path that generated the public key in
+that address, but deriving the private key instead), and sign it. Once the
+proposal reaches m signatures, any cosigner can broadcast it to the network,
+becoming final. The specifics of how this proposal is structured, and the
+protocol to accept or reject it, belong to another BIP, in my opinion. 
+
+===Address discovery===
 
 When the master seed is imported from an external source the software should
 start to discover the accounts in the following manner:
@@ -135,19 +186,30 @@ and stops searching the address chain.
 Wallet software should warn when user is trying to exceed the gap limit on
 an external chain by generating a new address.
 
+
+===Rationale===
+
+This stucture provides a general way of doing HDPM wallets between m-of-n
+parties. Here are some explanations about the design decisions made.
+
+The reason for using separate branches for each cosigner is we don't want
+two of them generating the same address and receiving simultaneous payments
+to it. The ideal case is that each address receives at most one payment,
+requested by the corresponding cosigner. 
+
 ==Examples==
 
 {|
-!cosigner_id
-!chain
-!address
+!cosigner_index
+!change
+!address_index
 !path
 |-
-|Bitcoin
 |first
-|external
 |first
-|m / 44' / 0' / 0' / 0 / 0
+|receive
+|first
+|m / NNNN' / 0' / 0' / 0 / 0
 |-
 |Bitcoin
 |first
