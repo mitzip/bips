@@ -2,7 +2,7 @@
   BIP:     BIP-NNNN
   Title:   Structure for Deterministic P2SH Multisignature Wallets
   Authors: Manuel Araoz <manu@bitpay.com>
-           Ryan X Charles <ryan@bitpay.com>
+           Ryan X. Charles <ryan@bitpay.com>
            Matias Alejo Garcia <matias@bitpay.com>
   Status:  Draft
   Type:    Standards Track
