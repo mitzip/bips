@@ -1,4 +1,4 @@
-<pre>
+<code>
   BIP:     BIP-NNNN
   Title:   Structure for Deterministic P2SH Multisignature Wallets
   Authors: Manuel Araoz <manu@bitpay.com>
@@ -7,7 +7,7 @@
   Status:  Draft
   Type:    Standards Track
   Created: yyyy-mm-dd
-</pre>
+</code>
 
 ==Abstract==
 
@@ -35,9 +35,9 @@ This BIP will allow interoperability between various DPM wallet implementations.
 
 We define the following levels in BIP32 path:
 
-<pre>
+<code>
 m / purpose' / cosigner_index / change / address_index
-</pre>
+</code>
 
 Apostrophe in the path indicates that BIP32 hardened derivation is used.
 
@@ -48,9 +48,9 @@ Each level has special meaning described in the chapters below.
 Purpose is a constant set to NNNN, following the BIP43 recommendation.
 It indicates that the subtree of this node is used according to this specification.
 
-<pre>
+<code>
 m / purpose' / *
-</pre>
+</code>
 
 Hardened derivation is used at this level.
 
@@ -66,11 +66,11 @@ in the "Address generation" section.
 Software should only use indices corresponding to each of the N cosigners
 sequentially. For example, for a 2-of-3 HDPM wallet, having the following
 master public keys:
-<pre>
+<code>
 03a473275a750a20b7b71ebeadfec83130c014da4b53f1c4743fcf342af6589a38
 039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463
 03f76588e06c0d688617ef365d1e58a7f1aa84daa3801380b1e7f12acc9a69cd13
-</pre>
+</code>
 
 it should use `m / purpose ' / 0 / *` for 
 `039863fb5f07b667d9b1ca68773c6e6cdbcac0088ffba9af46f6f6acd153d44463`, 
