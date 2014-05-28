@@ -214,101 +214,11 @@ requested by the corresponding cosigner.
 |receive
 |first
 |m / NNNN' / 0' / 0' / 0 / 0
-|-
-|Bitcoin
-|first
-|external
-|second
-|m / 44' / 0' / 0' / 0 / 1
-|-
-|Bitcoin
-|first
-|change
-|first
-|m / 44' / 0' / 0' / 1 / 0
-|-
-|Bitcoin
-|first
-|change
-|second
-|m / 44' / 0' / 0' / 1 / 1
-|-
-|Bitcoin
-|second
-|external
-|first
-|m / 44' / 0' / 1' / 0 / 0
-|-
-|Bitcoin
-|second
-|external
-|second
-|m / 44' / 0' / 1' / 0 / 1
-|-
-|Bitcoin
-|second
-|change
-|first
-|m / 44' / 0' / 1' / 1 / 0
-|-
-|Bitcoin
-|second
-|change
-|second
-|m / 44' / 0' / 1' / 1 / 1
-|-
-|Bitcoin Testnet
-|first
-|external
-|first
-|m / 44' / 1' / 0' / 0 / 0
-|-
-|Bitcoin Testnet
-|first
-|external
-|second
-|m / 44' / 1' / 0' / 0 / 1
-|-
-|Bitcoin Testnet
-|first
-|change
-|first
-|m / 44' / 1' / 0' / 1 / 0
-|-
-|Bitcoin Testnet
-|first
-|change
-|second
-|m / 44' / 1' / 0' / 1 / 1
-|-
-|Bitcoin Testnet
-|second
-|external
-|first
-|m / 44' / 1' / 1' / 0 / 0
-|-
-|Bitcoin Testnet
-|second
-|external
-|second
-|m / 44' / 1' / 1' / 0 / 1
-|-
-|Bitcoin Testnet
-|second
-|change
-|first
-|m / 44' / 1' / 1' / 1 / 0
-|-
-|Bitcoin Testnet
-|second
-|change
-|second
-|m / 44' / 1' / 1' / 1 / 1
 |}
 
 ==Compatible walets==
 
-* [[https://mytrezor.com|myTREZOR web wallet]] ([[https://github.com/trezor/webwallet|source]])
+* [[https://copay.io|Copay wallet]] ([[https://github.com/bitpay/copay|source]])
 
 ==Reference==
 
