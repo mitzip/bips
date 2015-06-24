@@ -72,7 +72,7 @@ Raising the 1MB block size has been [https://www.google.com/webhp?#q=1mb+limit+s
 
 ===Centralization of full nodes===
 
-The number of fully-validating nodes reachable on the network has been steadily declining. Increasing the capacity of the network to handle transactions by increasing the maximum block size my accelerate that decline, meaning a less distributed network that is more vulnerable to disruption. The size of this effect is debatable; the author of this BIP believes that the decline in fully validating nodes on the network is largely due to the availability of convenient, attractive, secure, lightweight wallet software and the general trend away from computing on desktop computers to mobile phones and tablets.
+The number of fully-validating nodes reachable on the network has been steadily declining. Increasing the capacity of the network to handle transactions by increasing the maximum block size may accelerate that decline, meaning a less distributed network that is more vulnerable to disruption. The size of this effect is debatable; the author of this BIP believes that the decline in fully validating nodes on the network is largely due to the availability of convenient, attractive, secure, lightweight wallet software and the general trend away from computing on desktop computers to mobile phones and tablets.
 
 Increasing the capacity of the network to handle transactions should enable increased adoption by users and businesses, especially in areas of the world where existing financial infrastructure is weak. That could lead to a more robust network with nodes running in more political jurisdictions.
 
